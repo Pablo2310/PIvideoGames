@@ -1,15 +1,14 @@
 const {Router} = require ('express');
+// require('dotenv').config();
 const router = Router()
 const axios = require('axios');
-const { API_KEY } = process.env;
+// const { obtenerGames, crearJuego } = require('../controlador/Games.js');
 
-router.get('/getApiGames', async (req, res) => {
-   try {
-    const APIgames = await axios.get('https://api.rawg.io/api/games?key=${API_KEY}&page_size=100')
-    res.status(200).send(APIgames.data);
-   } catch (error) {
-       console.log(error)
-   } 
-});
+
+// router.get('/getApiGames', obtenerGames);
+
+// router.post('/crear', crearJuego)
+
+
 
 module.exports = router;
