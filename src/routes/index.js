@@ -64,11 +64,12 @@ router.get('/videogames',  async (req, res) => {
     } catch(error){console.log(error)}
 
 });
-router.get('/videogames',  async (req, res) => {})
 
 router.get('/genres',  async (req, res) => {
 try {
-    const genrApi = await axios.get('https://api.rawg.io/api/genres?key=df1e054808e446baa25f429ca59c3ba2')
+
+    //CORREGIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    const genrApi = await axios.get('https://api.rawg.io/api/genres?key=df1e054808e446baa25f429ca59c3ba2') /////////// CORREGIR!!!!!! SACAR LA KEY!!!!!!
     const genr = await genrApi.data.results.map(g => g.name)
     const eachGenr = genr.map(g => {
         for(let i = 0; i< genr.length; i++) return g})
@@ -86,6 +87,7 @@ try {
 }})
 
 router.post('/videogames',  async (req, res) => {
+ /////// REVISAR EL POST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    
     try {
     let {
         name,
@@ -115,6 +117,16 @@ router.post('/videogames',  async (req, res) => {
 } catch (e) {
     res.send(e)
 }
+})
+
+router.get('/videogames/:id',  async (req, res) => {
+    const {id} = req.params
+    const gamesTotal = await AllVideoGames()
+        const gamesId = await gamesTotal.filter ( g => g.id == id)
+        gamesId.length > 0
+                  ? res.status(200).json(gamesId) 
+                  : res.status(404).json({error: 'No encontre el videojuego'})
+    
 })
 
 module.exports = router;
